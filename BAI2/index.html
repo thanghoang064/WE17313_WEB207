@@ -7,9 +7,10 @@
     <script src="libs/angular.min.js"></script>
 </head>
 <body ng-app="myapp">
-    <div ng-controller="demoController">
+    <!-- <div ng-controller="demoController">
         <h1>{{ welcome }}</h1>
-    </div>
+        <h3 ng-bind="welcome"></h3>
+    </div> -->
     <div ng-controller="infoController">
         <table border="1">
             <tr>
@@ -23,35 +24,53 @@
                 <td>{{ i.phone }}</td>
             </tr>
         </table>
+        <input type="text" ng-model="test"/>
+        <select ng-model="tinh">
+            <option value="1">Hà Nội</option>
+            <option value="2">Hưng Yên </option>
+            <option value="3">Hải Dương </option>
+        </select>
+        Nam
+        <input ng-model="gioitinh" type="radio" value="1" />
+        Nữ
+        <input ng-model="gioitinh" type="radio" value="2" />
+        <button ng-click="sayHello()">Test</button>
+        <h1>{{ hihi }}</h1>
+        <h1 ng-mousemove="myMouse()">Đưa chuột vào</h1>
+        {{ count }}
     </div>
 </body>
+<script src="app.js"></script>
 <script>
+   
     //viết chuẩn
-    function myFunc($scope) { // luôn luôn có đối với mỗi function
-        $scope.welcome = "hihi"; // sau dấu chấm của scope là biến
-        //tôi định nghĩa sẽ render ra khu vực demoController
-    }
+    // function myFunc($scope) { // luôn luôn có đối với mỗi function
+    //     $scope.welcome = "hihi"; // sau dấu chấm của scope là biến
+    //     //tôi định nghĩa sẽ render ra khu vực demoController
+    // }
     // khai báo vùng sử dụng angular js trên html
-    var app = angular.module("myapp",[]);
-    //định nghĩa controller map với hàm  myFunc
-    app.controller("demoController",myFunc);
+    // var app = angular.module("myapp",[]);
+    // //định nghĩa controller map với hàm  myFunc
+    // app.controller("demoController",myFunc);
     //viết tắt
-    app.controller("infoController",function ($scope) {
-        // $scope.name = "Nguyễn Văn A";
-        // $scope.age = 18;
-        // $scope.phone = "0929292929";
-            //kiểu dữ liệu đối tượng
-            $scope.info = [{
-                name:"Nguyễn Văn A",
-                age:18,
-                phone:"09139292929"
-            },
-            {
-                name:"Nguyễn Văn B",
-                age:19,
-                phone:"09139292955"
-            }
-            ];
-    })
+    // app.controller("infoController",function ($scope) {
+    //     // $scope.name = "Nguyễn Văn A";
+    //     // $scope.age = 18;
+    //     // $scope.phone = "0929292929";
+    //         //kiểu dữ liệu đối tượng
+    //         $scope.info = [{
+    //             name:"Nguyễn Văn A",
+    //             age:18,
+    //             phone:"09139292929"
+    //         },
+    //         {
+    //             name:"Nguyễn Văn B",
+    //             age:19,
+    //             phone:"09139292955"
+    //         }
+    //         ];
+         
+        
+    // })
 </script>
 </html>
