@@ -1,0 +1,15 @@
+<div>
+    <table>
+        <tr>
+            <td>Họ tên</td>
+            <td><input type="text" ng-model="inputValue.ten"/></td>
+           <td> <p ng-if="kiemTraDuLieu.ten == true" style="color: rgb(223, 92, 92);">Vui long nhap ho ten</p> </td>
+        </tr>
+        <tr>
+            <td>Tuổi </td>
+            <td><input type="text" ng-model="inputValue.tuoi"/></td>
+            <td> <p ng-if="kiemTraDuLieu.tuoi == true" style="color: red;">Vui long nhap tuoi</p> </td>
+        </tr>
+    </table>
+    <button ng-click="onSubmitForm()">Tạo mới </button>
+</div>
