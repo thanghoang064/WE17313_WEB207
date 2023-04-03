@@ -48,12 +48,27 @@ window.GioiThieuController = function($scope,$routeParams,$http) {
             var editId = $scope.editId;
             //kiểm tra nếu tồn tại editId thì là sửa 
             if(editId) {
-                for(var i = 0;i< $scope.danhsach.length;i++) {
-                    if($scope.danhsach[i].id == editId) {
-                        $scope.danhsach[i].ten = $scope.inputValue.ten;
-                        $scope.danhsach[i].tuoi =  $scope.inputValue.tuoi;
-                    }
+                // for(var i = 0;i< $scope.danhsach.length;i++) {
+                //     if($scope.danhsach[i].id == editId) {
+                //         $scope.danhsach[i].ten = $scope.inputValue.ten;
+                //         $scope.danhsach[i].tuoi =  $scope.inputValue.tuoi;
+                //     }
+                // }
+                //cục dữ liệu được update 
+                let updateItem = {
+                    ten : $scope.inputValue.ten,
+                    tuoi : $scope.inputValue.tuoi
                 }
+                // sửa 
+                $http.put(
+                    `${apiURL}/${editId}`, // link api cập nhập theo id cần sửa
+                    updateItem // data cần cập nhập 
+                ).then(function(response){
+                    if(response.status == 200) {
+                        //gọi hàm getData để cập nhập lại dữ liệu
+                        $scope.getData();
+                    }
+                })
                 $scope.onClose();
                 return;
             }
@@ -85,24 +100,42 @@ window.GioiThieuController = function($scope,$routeParams,$http) {
             $scope.onClose();
         }
     }
+    $scope.selectedDate = new Date();
+    console.log(new Date());
+
+    // Xử lý sự kiện khi người dùng chọn ngày
+    $scope.dateSelected = function() {
+      console.log("Bạn đã chọn ngày: " + $scope.selectedDate);
+    }
     $scope.onEdit = function(editId) {
         $scope.editId = editId;
         //tạo ra 1 đối tượng sửa 
-        var editItem  = {
-            ten:"",
-            tuoi:""
-        };
-        for(var i = 0;i< $scope.danhsach.length;i++) {
-            if($scope.danhsach[i].id == editId) {
-                editItem.ten = $scope.danhsach[i].ten;
-                editItem.tuoi = $scope.danhsach[i].tuoi;
+        // var editItem  = {
+        //     ten:"",
+        //     tuoi:""
+        // };
+        // for(var i = 0;i< $scope.danhsach.length;i++) {
+        //     if($scope.danhsach[i].id == editId) {
+        //         editItem.ten = $scope.danhsach[i].ten;
+        //         editItem.tuoi = $scope.danhsach[i].tuoi;
+        //     }
+        // }
+        
+        $http.get(`${apiURL}/${editId}`).then(function(response){
+            console.log(response);
+            if(response.status == 200) { // khi gọi api thành công sẽ bắn 
+                // dữ liệu lên form 
+                 $scope.inputValue = {
+                    ten: response.data.ten,
+                    tuoi: response.data.tuoi
+                }
             }
-        }
+        })
         // bắn giá trị cần sửa vào input form 
-        $scope.inputValue = {
-            ten: editItem.ten,
-            tuoi: editItem.tuoi
-        }
+        // $scope.inputValue = {
+        //     ten: editItem.ten,
+        //     tuoi: editItem.tuoi
+        // }
     }
 
 }
